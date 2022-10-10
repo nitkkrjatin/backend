@@ -10,18 +10,22 @@ import {
     Legend
 } from "recharts";
 
+
+
 export default function StackedChart(props) {
 
     
   const arr=props.tasks
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
   let monN=0, tueN=0, wedN=0, thuN=0, friN=0,satN=0, sunN=0
   let monW=0, tueW=0, wedW=0, thuW=0, friW=0,satW=0, sunW=0
   let monM=0, tueM=0, wedM=0, thuM=0, friM=0,satM=0, sunM=0
   for(let i=0;i<arr.length;i++){
-    let subDate =
-    arr[i].startTime.substr(8, 2)
-    const d=new Date(arr[i].startTime)
+    const year=arr[i].startTime.substr(0,4)
+    const month=arr[i].startTime.substr(5,2)
+    const day=arr[i].startTime.substr(8,2)
+    const d=new Date(`${months[month-1]} ${day}, ${year}`)
       let x=d.getDay()
     if(x===1){
         if(arr[i].type==="Break"){
