@@ -23,7 +23,7 @@ export default function StackedChart(props) {
     arr[i].startTime.substr(8, 2)
     const d=new Date(arr[i].startTime)
       let x=d.getDay()
-    if(x===1){
+    if(x===0){
         if(arr[i].type==="Break"){
             monN+=arr[i].timeTaken;
         }else if(arr[i].type==="Meeting"){
@@ -33,7 +33,7 @@ export default function StackedChart(props) {
         }
             
         
-    }else if(x===2){
+    }else if(x===1){
         if(arr[i].type==="Break"){
             tueN+=arr[i].timeTaken;
         }else if(arr[i].type==="Meeting"){
@@ -41,7 +41,7 @@ export default function StackedChart(props) {
         }else{
             tueW+=arr[i].timeTaken;
         }
-    }else if(x===3){
+    }else if(x===2){
         if(arr[i].type==="Break"){
             wedN+=arr[i].timeTaken;
         }else if(arr[i].type==="Meeting"){
@@ -49,7 +49,7 @@ export default function StackedChart(props) {
         }else{
             wedW+=arr[i].timeTaken;
         }
-    }else if(x===4){
+    }else if(x===3){
         if(arr[i].type==="Break"){
             thuN+=arr[i].timeTaken;
         }else if(arr[i].type==="Meeting"){
@@ -57,7 +57,7 @@ export default function StackedChart(props) {
         }else{
             thuW+=arr[i].timeTaken;
         }
-    }else if(x===5){
+    }else if(x===4){
         if(arr[i].type==="Break"){
             friN+=arr[i].timeTaken;
         }else if(arr[i].type==="Meeting"){
@@ -65,7 +65,7 @@ export default function StackedChart(props) {
         }else{
             friW+=arr[i].timeTaken;
         }
-    }else if(x===6){
+    }else if(x===5){
         if(arr[i].type==="Break"){
             satN+=arr[i].timeTaken;
         }else if(arr[i].type==="Meeting"){
@@ -73,7 +73,7 @@ export default function StackedChart(props) {
         }else{
             satW+=arr[i].timeTaken;
         }
-    }else if(x===0){
+    }else if(x===6){
         if(arr[i].type==="Break"){
             sunN+=arr[i].timeTaken;
         }else if(arr[i].type==="Meeting"){
