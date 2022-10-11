@@ -3,6 +3,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUsers } from '../../features/auth/authSlice'
+import { resetT } from '../../features/tasks/taskSlice'
 
 const columns = [
   { field: 'id', headerName: 'id', width: 100 },
@@ -57,6 +58,7 @@ export default function DataTable() {
 
   useEffect(() => {
     if (user) dispatch(getUsers(user))
+    dispatch(resetT())
   }, [user, dispatch])
 
   let rows = []
@@ -67,7 +69,7 @@ export default function DataTable() {
       email: users[i].email,
       department: users[i].department,
       contactNumber: users[i].contactNumber,
-      joiningDate: user.joiningDate,
+      joiningDate: users[i].joiningDate,
       _id: users[i]._id,
     }
     rows.push(u)
@@ -77,14 +79,25 @@ export default function DataTable() {
   }
   return (
     <>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <div
-          style={{ height: '80vh', width: '90%', padding: '20px', margin: '20px 0' }}
+          style={{
+            height: '80vh',
+            width: '90%',
+            padding: '20px',
+            margin: '20px 0',
+          }}
         >
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={100}
+            pageSize={10}
             rowsPerPageOptions={[10]}
             checkboxSelection
             onRowClick={onClick}

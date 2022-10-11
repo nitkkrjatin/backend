@@ -10,7 +10,7 @@ export default function Form({ setOpenModal }) {
 
   const [formData, setFormData] = useState({
     name: '',
-    department: '',
+    department: 'Finance',
     email: '',
     contactNumber: '',
     joiningDate: '',

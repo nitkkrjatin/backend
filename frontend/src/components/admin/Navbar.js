@@ -1,75 +1,81 @@
-import React from "react";
-import Task from "../utils/Task";
-import Form from "../utils/Form";
-import "./Pop.css";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logout, reset } from "../../features/auth/authSlice";
-import { NotificationManager } from "react-notifications";
+import React from 'react'
+import Task from '../utils/Task'
+import Form from '../utils/Form'
+import './Pop.css'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logout, reset } from '../../features/auth/authSlice'
+import { NotificationManager } from 'react-notifications'
 
-import { resetT } from "../../features/tasks/taskSlice";
+import { resetT } from '../../features/tasks/taskSlice'
 
 export default function Navbar() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [count, setCount] = useState(1);
+  const [modalOpen, setModalOpen] = useState(false)
+  const [count, setCount] = useState(1)
 
   //jatin;s code
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth)
 
   const onLogout = () => {
-    navigate("/");
-    dispatch(logout());
-    dispatch(reset());
-    dispatch(resetT());
-  };
+    navigate('/')
+    dispatch(logout())
+    dispatch(reset())
+    dispatch(resetT())
+  }
   useEffect(() => {
-    if (!user) navigate("/");
-  }, [user, navigate]);
+    if (!user) navigate('/')
+  }, [user, navigate])
 
   const onClick = (e) => {
-    if (user.isAdmin) navigate(`/${user._id}/admin`);
-    else {
-      navigate(`/${user._id}`);
+    if (user.isAdmin) {
+      dispatch(resetT())
+      navigate(`/${user._id}/admin`)
+    } else {
+      navigate(`/${user._id}`)
     }
-  };
+  }
 
-  const name = user && user.isAdmin ? "Admin" : "User";
-  const temp = name === "Admin" ? "Add Employee" : "Add Task";
+  const name = user && user.isAdmin ? 'Admin' : 'User'
+  const temp = name === 'Admin' ? 'Add Employee' : 'Add Task'
   //jatin;s code ends here
 
   //
   return (
     <div>
-      <nav className="navbar navbar-light bg-dark justify-content-between px-4">
+      <nav className='navbar navbar-light bg-dark justify-content-between px-4'>
         {user ? (
           <>
             <button
-              className="btn bg-white"
+              className='btn bg-white'
               onClick={() => {
-                setCount(count + 1);
+                setCount(count + 1)
                 if (count % 2 === 1) {
-                  setModalOpen(true);
+                  setModalOpen(true)
                 } else {
-                  setModalOpen(false);
+                  setModalOpen(false)
                 }
               }}
             >
               {temp}
             </button>
             <div>
-              <button className="btn bg-white my-2 my-sm-0 mx-2" type="submit" onClick={onClick}>
+              <button
+                className='btn bg-white my-2 my-sm-0 mx-2'
+                type='submit'
+                onClick={onClick}
+              >
                 {user.name}
               </button>
               <button
-                className="btn bg-white my-2 my-sm-0"
-                type="submit"
+                className='btn bg-white my-2 my-sm-0'
+                type='submit'
                 onClick={() => {
-                  onLogout();
-                  NotificationManager.success("", "Logout Successful", 2000);
+                  onLogout()
+                  NotificationManager.success('', 'Logout Successful', 2000)
                 }}
               >
                 Logout
@@ -77,18 +83,18 @@ export default function Navbar() {
             </div>
           </>
         ) : (
-          <div className="bg-light btn">Employee Tracker</div>
+          <div className='bg-light btn'>Employee Tracker</div>
         )}
       </nav>
-      {modalOpen && temp === "Add Employee" && (
-        <div className="modalBackground">
-          <div className="modalContainer">
+      {modalOpen && temp === 'Add Employee' && (
+        <div className='modalBackground'>
+          <div className='modalContainer'>
             <div
-              className="body"
+              className='body'
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               {modalOpen && <Form setOpenModal={setModalOpen} />}
@@ -96,15 +102,15 @@ export default function Navbar() {
           </div>
         </div>
       )}
-      {modalOpen && temp === "Add Task" && (
-        <div className="modalBackground">
-          <div className="modalContainer">
+      {modalOpen && temp === 'Add Task' && (
+        <div className='modalBackground'>
+          <div className='modalContainer'>
             <div
-              className="body"
+              className='body'
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               {modalOpen && <Task setOpenModal={setModalOpen} />}
@@ -113,5 +119,5 @@ export default function Navbar() {
         </div>
       )}
     </div>
-  );
+  )
 }

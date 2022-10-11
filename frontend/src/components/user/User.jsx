@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { PieChart, Pie, Sector } from "recharts";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import StackedChart from "./StackedChart";
 import { useSelector, useDispatch } from "react-redux";
@@ -82,6 +83,7 @@ const renderActiveShape = (props) => {
 
 export default function User() {
   const dispatch = useDispatch();
+  const {id}=useParams()
 
   const { tasks, isError, isSuccess, message } = useSelector(
     (state) => state.tasks
@@ -102,9 +104,9 @@ export default function User() {
       toast.error(message);
     }
     if (!isSuccess) {
-      dispatch(getTasks());
+      dispatch(getTasks(id));
     }
-  }, [isSuccess, tasks, isError, message, dispatch]);
+  }, [isSuccess, tasks, isError, message,id, dispatch]);
 
   let breakTime = 0;
   let meetingTime = 0;

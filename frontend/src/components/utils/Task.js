@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { createTask, resetT } from '../../features/tasks/taskSlice'
 import { toast } from 'react-toastify'
 
-export default function Task({setOpenModal}) {
+export default function Task({ setOpenModal }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -18,6 +18,7 @@ export default function Task({setOpenModal}) {
   const { description, type, startTime, timeTaken } = formData
 
   const { isError, isSuccess, message } = useSelector((state) => state.tasks)
+  const { user } = useSelector((state) => state.auth)
 
   useEffect(() => {
     if (isError) {
@@ -39,6 +40,7 @@ export default function Task({setOpenModal}) {
       type,
       startTime,
       timeTaken,
+      user: user._id,
     }
 
     dispatch(createTask(taskData))

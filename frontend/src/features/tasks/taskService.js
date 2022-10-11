@@ -17,14 +17,13 @@ const createTask = async (taskData, token) => {
 }
 
 //Get user tasks
-const getTasks = async (token) => {
+const getTasks = async (id, token) => {
   const config = {
     headers: {
       authorization: `Bearer ${token}`,
     },
   }
-
-  const response = await axios.get(API_URL, config)
+  const response = await axios.get(`${API_URL}/${id}`, config)
 
   return response.data
 }

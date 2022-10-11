@@ -27,10 +27,11 @@ const setTask = asyncHandler(async (req, res) => {
 })
 
 //@desc Get Tasks
-// @route GET/api/tasks
+// @route GET/api/tasks/:id
 //@access PRIVATE
 const getTasks = asyncHandler(async (req, res) => {
-  const tasks = await Task.find({ user: req.user.id })
+  // console.log(req.params.id)
+  const tasks = await Task.find({ user: req.params.id })
 
   res.status(201).json(tasks)
 })
